@@ -1,0 +1,24 @@
+{
+  "name": "happyhalloweenacc",
+  "version": "1.0.0",
+  "description": "say happy halloween in console log",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jason-carver/is-great.git"
+  },
+  "keywords": [
+    "simple",
+    "Halloween",
+    "npm"
+  ],
+  "author": "Jason B Carver",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jason-carver/is-great/issues"
+  },
+  "homepage": "https://github.com/jason-carver/is-great#readme"
+}
