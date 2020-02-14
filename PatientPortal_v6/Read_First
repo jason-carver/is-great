@@ -1,0 +1,34 @@
+mongoDb
+Db name:Patients
+Collection name:Patients
+
+// hard coded data d/t issues with mongo
+let testPt = [{
+        "name":"able",
+         "username":"alpha",
+        "mdId":"111aaa",
+        "GBS": [{time: 0600, GBS:100}],
+        "points": 10,
+        "msgToMd": "hello doc",
+        "msgFromMd":"hello pt"
+    },
+    {
+        "name":"bravo",
+        "username":"bravo",
+        "mdId":"222bbb",
+        "GBS": [{time: 0700, GBS:101}],
+        "points": 20,
+        "msgToMd": "hi there",
+        "msgFromMd":"hi here"
+    }]
+
+    let testMd=[{
+        "name":"charlie",
+        "username":"doc_feel_good"
+        "MD_ID":"111aaa"
+
+    }]
+
+
+
+   

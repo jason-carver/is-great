@@ -27,6 +27,10 @@ let patientSchema = mongoose.Schema({
         type: String,
         required: [true, `Name is REQUIRED`]
     },
+    username: {
+        type: String,
+        required: [true, `User Name is REQUIRED`]
+    },
     mdId: {
         type: String,
         required: [true, `Doctors ID is REQUIRED`]
@@ -51,6 +55,7 @@ let PatientModel = mongoose.model('patient', patientSchema)
 // hard coded data d/t issues with mongo
 let testPt = [{
     "ptName":"able",
+    "username":"alpha",
     "mdId":"111aaa",
     "GBS": [{time: 0600, GBS:100}],
     "points": 10,
@@ -58,6 +63,7 @@ let testPt = [{
     },
     {
         "ptName":"bravo",
+        "username":"bravo",
         "mdId":"222bbb",
         "GBS": [{time: 0700, GBS:101}],
         "points": 20,
