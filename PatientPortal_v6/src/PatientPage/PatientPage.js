@@ -12,7 +12,7 @@ class PatientPage extends Component{
         this.state={
             user:{
             name:"",
-            mdId:"",
+            MDID:"",
             GBS: [],
             points: "",
             msgToMd: "",
@@ -44,6 +44,8 @@ class PatientPage extends Component{
 
 render(){
     const{user,users}=this.props;
+    const name= this.state.user.name
+    var filteredArray = user.filter( obj => obj.value === {name} ).map( obj => obj.GBS );
     return(
        <div>
         <div className="col-md-10 col-md-offset-3">
@@ -167,7 +169,7 @@ render(){
 
 
 {/* {Need to display last 24 hr GBS and messages from MD } */}
-
+                return(filteredArray)   
         </Form>
         </div>
     );
