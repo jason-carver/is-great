@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
-
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI ||
@@ -21,9 +21,9 @@ mongoose.connect(process.env.MONGODB_URI ||
     }
 )
 // define schema
-mongoose.model('products', productSchema);
-let patientSchema = mongoose.Schema({
-   ptName: {
+
+let patientSchema =mongoose.Schema({
+   name: {
         type: String,
         required: [true, `Name is REQUIRED`]
     },
@@ -31,7 +31,7 @@ let patientSchema = mongoose.Schema({
         type: String,
         required: [true, `User Name is REQUIRED`]
     },
-    mdId: {
+    MDID: {
         type: String,
         required: [true, `Doctors ID is REQUIRED`]
     },
@@ -44,11 +44,11 @@ let patientSchema = mongoose.Schema({
     msgToMd: {
         type: String,
     },
-    msgToMd: {
+    msgToPT: {
         type: String,
     }
 })
-
+mongoose.model('patient', patientSchema);
 // create model
 let PatientModel = mongoose.model('patient', patientSchema)
 

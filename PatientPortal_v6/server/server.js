@@ -21,9 +21,9 @@ mongoose.connect(process.env.MONGODB_URI ||
     }
 )
 // define schema
-mongoose.model('products', productSchema);
+
 let patientSchema = mongoose.Schema({
-   ptName: {
+   name: {
         type: String,
         required: [true, `Name is REQUIRED`]
     },
@@ -31,7 +31,7 @@ let patientSchema = mongoose.Schema({
         type: String,
         required: [true, `User Name is REQUIRED`]
     },
-    mdId: {
+    MDID: {
         type: String,
         required: [true, `Doctors ID is REQUIRED`]
     },
@@ -44,27 +44,27 @@ let patientSchema = mongoose.Schema({
     msgToMd: {
         type: String,
     },
-    msgToMd: {
+    msgToPt: {
         type: String,
     }
 })
-
+mongoose.model('patient', patientSchema);
 // create model
 let PatientModel = mongoose.model('patient', patientSchema)
 
 // hard coded data d/t issues with mongo
 let testPt = [{
-    "ptName":"able",
+    "name":"able",
     "username":"alpha",
-    "mdId":"111aaa",
+    "MDID":"111aaa",
     "GBS": [{time: 0600, GBS:100}],
     "points": 10,
     "msgToMd": "hello doc"
     },
     {
-        "ptName":"bravo",
+        "name":"bravo",
         "username":"bravo",
-        "mdId":"222bbb",
+        "MDID":"222bbb",
         "GBS": [{time: 0700, GBS:101}],
         "points": 20,
         "msgToMd": "hi there"
