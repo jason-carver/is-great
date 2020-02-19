@@ -1,13 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {MdPage} from './MdPage';
-import { render } from '@testing-library/react';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
-import {Button, Form,Row,Col,Control,Table}  from 'react-bootstrap';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Route, Switch, Redirect,BrowserRouter as Router } from 'react-router-dom';
 
 function App() { 
     return (
