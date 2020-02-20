@@ -4,48 +4,64 @@ import './loginpage.css';
 
 class Login extends Component{
     constructor(props){
-        super(props);
+        super(props);    
 
-        // reset login status
-        // this.props.logout();
-
-        this.state={
-            user:{
-            username:"",
-            submitted: false
-            }
-        };
+        this.state = {
+                user: {
+                    firstName:'',
+                    lastName:'',
+                    username:'',              
+                    GBS:'',
+                    A1C:'',
+                    points:'',
+                    MDID:'',
+                    msgToMd:''
+                },
+                submitted: false
+            };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+	this.login=this.login.bind(this);
 } 
 handleChange(e) {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    const {user}=this.state;
+    this.setState({ user:{...user,[name]: value} });
 }
 
 handleSubmit(e) {
     e.preventDefault();
 
     this.setState({ submitted: true });
-    const {username} = this.state;
-    if (username) {
-        this.props.login(username);
+    const {user} = this.state;
+    if (user.username) {
+        this.login(user);
     }
 }
+  login(data){
+            console.log(data) 
+            this.setState ({
+                user: {                   
+                    username: ''          
+                },
+                submitted: false
+            });     
+        }
+
+
 render() {
   
-    const {username, submitted} = this.state;
+    const {user, submitted} = this.state;
     return (
-        <div className="col-md-6 col-md-offset-3">
-            <h2>Gore Health Apps</h2>
-            <h2> Patient Login Page</h2>
+        <div id='box' className="col-md-6 col-md-offset-3">          
+             <h2>Login Page</h2> 
             <form name="form" onSubmit={this.handleSubmit}>
-                <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
+                <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
                     <label htmlFor="username">Username</label>
-                    <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
-                    {submitted && !username &&
-                        <div className="help-block">Username is required</div>
+                    <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
+                    {submitted && !user.username &&                      
+                        <div className='help-block'>Username isrequired</div>   
                     }
                 </div>               
                 <div className="form-group">
@@ -56,9 +72,7 @@ render() {
             </form>
         </div>
     );
-}
-}
+                }
+            }
 
 export default Login;
-
-

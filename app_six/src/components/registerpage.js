@@ -1,28 +1,32 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import './registerpage.css';
 
-
-    class Register extends React.Component {
+    class Register extends Component {
         constructor(props) {
             super(props);
     
-            this.state = {
+          this.state = {
                 user: {
-                    firstName: '',
-                    lastName: '',
-                    username: '',
-                    password: ''
+                    firstName:'',
+                    lastName:'',
+                    username:'',                  
+                    GBS:'',
+                    A1C:'',
+                    points:'',
+                    MDID:'',
+                    msgToMd:''
                 },
                 submitted: false
             };
     
             this.handleChange = this.handleChange.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
+            this.register = this.register.bind(this);
         }
     
-        handleChange(event) {
-            const { name, value } = event.target;
+        handleChange(e) {
+            const { name, value } = e.target;
             const { user } = this.state;
             this.setState({
                 user: {
@@ -32,20 +36,31 @@ import './registerpage.css';
             });
         }
     
-        handleSubmit(event) {
-            event.preventDefault();
+        handleSubmit(e) {
+            e.preventDefault();
     
             this.setState({ submitted: true });
             const { user } = this.state;
-            if (user.firstName && user.lastName && user.username && user.password) {
-                this.props.register(user);
+            if (user.firstName && user.lastName && user.username) {
+                this.register(user);
             }
         }
-    
+        register(data)    {
+            console.log(data) 
+            this.setState ({
+                user: {
+                    firstName: '',
+                    lastName: '',
+                    username: ''                   
+                },
+                submitted: false
+            });     
+        }
+
         render() {           
             const { user, submitted } = this.state;
             return (
-                <div className="col-md-6 col-md-offset-3">
+                <div id='box' className="col-md-6 col-md-offset-3">
                     <h2>Register</h2>
                     <form name="form" onSubmit={this.handleSubmit}>
                         <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
@@ -68,18 +83,11 @@ import './registerpage.css';
                             {submitted && !user.username &&
                                 <div className="help-block">Username is required</div>
                             }
-                        </div>
-                        <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
-                            <label htmlFor="password">Password</label>
-                            <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
-                            {submitted && !user.password &&
-                                <div className="help-block">Password is required</div>
-                            }
-                        </div>
+                        </div>                       
                         <div className="form-group">
                             <button className="btn btn-primary">Register</button>
                            
-                            <Link to="/login" className="btn btn-link">Cancel</Link>
+                            <Link to="./" className="btn btn-link">Cancel</Link>
                         </div>
                     </form>
                 </div>
