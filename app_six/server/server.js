@@ -23,7 +23,11 @@ mongoose.connect(process.env.MONGODB_URI ||
 // define schema
 
 let patientSchema =mongoose.Schema({
-   name: {
+   firstName: {
+        type: String,
+        required: [true, `Name is REQUIRED`]
+    },
+    lastName: {
         type: String,
         required: [true, `Name is REQUIRED`]
     },
@@ -33,12 +37,15 @@ let patientSchema =mongoose.Schema({
     },
     MDID: {
         type: String,
-        required: [true, `Doctors ID is REQUIRED`]
+       
     },
     GBS: {
         type: [{time:Date,GBS:Number}],        
     },
      points: {         
+        type: Number,
+    },
+    A1C: {         
         type: Number,
     },
     msgToMd: {
@@ -48,26 +55,32 @@ let patientSchema =mongoose.Schema({
         type: String,
     }
 })
-mongoose.model('patient', patientSchema);
+mongoose.model('Patient', patientSchema);
 // create model
 let PatientModel = mongoose.model('patient', patientSchema)
 
 // hard coded data d/t issues with mongo
 let testPt = [{
-    "name":"able",
+    "firstName":"able",
+    "lastName":"apple",
     "username":"alpha",
     "MDID":"111aaa",
     "GBS": [{time: 0600, GBS:100}],
     "points": 10,
-    "msgToMd": "hello doc"
+    "A1C": 6.4,
+    "msgToMd": "hello doc",
+    "msgToPt": "hello patient"
     },
     {
-        "name":"bravo",
+        "firstName":"backer",
+        "lastName":"banana",
         "username":"bravo",
         "MDID":"222bbb",
         "GBS": [{time: 0700, GBS:101}],
         "points": 20,
-        "msgToMd": "hi there"
+        "A1c": 6.2,
+        "msgToMd": "hi there",
+        "msgToPt":"hi back"
         }]
 
 // READ
@@ -93,8 +106,8 @@ app.post('/Patient', (req, res) => {
 })
 
 // 8) Delete - DELETE - findByIdAndDelete based on id
-app.delete('/patient/:patientid', function(req, res) {
-    PatientModel.findByIdAndDelete(req.params.id, function(err, todo) {
+app.delete('/Patient/:Patientid', function(req, res) {
+    PatientModel.findByIdAndDelete(req.params.id, function(err, Patient) {
         if(err) {
             res.status(404).send({
                 code: 1234,
@@ -109,7 +122,7 @@ app.delete('/patient/:patientid', function(req, res) {
 
 // 7) Update - PUT - findById based on id, then update and save.
 app.put('/Patient/:id', (req, res) => {
-    PatientModel.findById(req.params.id, function(err, todo) {
+    PatientModel.findById(req.params.id, function(err, Patient) {
         if(err) {
             res.status(400).send({
                 code: 1236,

@@ -48,13 +48,13 @@ import './mdpage.css';
                        
                         <tr class="table-primary">
                             <th scope="row"class="bg-info">2</th>
-                             <td class="bg-info">Mary Curie</td>
-                             <td class="bg-info">54</td>
+            <td class="bg-info">{user.firstName }{user.lastName}</td>
+            <td class="bg-info">{user.GBS}</td>
                              <td class="bg-info">6.4</td>
                              <td class="bg-info" >05:23 / 47 13:45 / 68 20:00 / 52 21:05 / 50</td>
                              <td class="bg-info">-</td>
                              <td class="bg-info">No</td>
-                             <td class="bg-info"></td>
+            <td class="bg-info">{user.msgFromMd}</td>
                         </tr>
                         <tr class="table-primary">
                         <th scope="row"class="bg-info">3</th> 

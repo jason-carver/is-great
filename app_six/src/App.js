@@ -1,31 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-
-import  Home from './components/homepage';
-import Login  from './components/loginpage';
-import Register  from './components/registerpage';
-import Mdpage from './components/mdpage';
-import Ptpage from './components/ptpage';
-import Shopping from './components/shoppingpage';
+import  Home from './components/landingpage/homepage';
+import Login  from './components/pt_folder/pt_login/loginpage';
+import Register  from './components/pt_folder/pt_reg/registerpage';
+import Ptpage from './components/pt_folder/pt_view/ptpage';
+import Mdlogin  from './components/md_folder/md_login/mdloginpage';
+import Mdregister  from './components/md_folder/md_reg/mdregistrationpage';
+import Mdpage from './components/md_folder/md_view/mdpage';
 
 function App() { 
   return (
     <div className="jumbotron">
         <div className="container">
             <div className="col-sm-8 col-sm-offset-2">                  
-                <Router>
-                   
+                <Router>                   
                       {/* HomePage is route to landingPage */}
                         <Route exact path="/" component={Home} />
                         <Route path="/loginpage" component={Login} />
                         <Route path="/registerpage" component={Register} />
-                        <Route path="/mdpage" component={Mdpage} />
-                        <Route path="/ptpage" component={Ptpage} />
-                        <Route path="/shoppingpage" component={Shopping} />
-                        {/* <Redirect from="*" to="/" /> */}
-                  
+                        <Route path="/pt_view/ptpage" component={Ptpage} />
+                                                     
+                        <Route path="/mdloginpage" component={Mdlogin} />
+                        <Route path="/mdregistrationpage" component={Mdregister} />
+                        <Route path="/mdpage" component={Mdpage} /> 
+                                       
                 </Router>
             </div>
         </div>

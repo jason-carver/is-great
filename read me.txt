@@ -1,0 +1,6 @@
+things to do list..
+1)put get request in ptpage and display data (pt name, points,  an input for GBS, an input for msg to doctor,  display time Gbs pairs)
+
+2)connect html/js store (for display/function...stretch tie into points for spending)
+
+3) passwordless login or DB checked.

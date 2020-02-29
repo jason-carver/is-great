@@ -86,8 +86,10 @@ import './registerpage.css';
                         </div>                       
                         <div className="form-group">
                             <button className="btn btn-primary">Register</button>
-                           
-                            <Link to="./" className="btn btn-link">Cancel</Link>
+                           <button>
+                           <Link to="./" className="btn btn-link">Cancel</Link>
+                           </button>
+                            
                         </div>
                     </form>
                 </div>

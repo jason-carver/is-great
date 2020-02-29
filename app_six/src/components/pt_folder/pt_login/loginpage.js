@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import{ Redirect} from 'react-router';
+import axios from 'axios';
 import './loginpage.css';
 
 class Login extends Component{
@@ -7,7 +9,7 @@ class Login extends Component{
         super(props);    
 
         this.state = {
-                user: {
+                patient: {
                     firstName:'',
                     lastName:'',
                     username:'',              
@@ -17,7 +19,8 @@ class Login extends Component{
                     MDID:'',
                     msgToMd:''
                 },
-                submitted: false
+                submitted: false,
+                redirect:false
             };
     
     this.handleChange = this.handleChange.bind(this);
@@ -26,25 +29,29 @@ class Login extends Component{
 } 
 handleChange(e) {
     const { name, value } = e.target;
-    const {user}=this.state;
-    this.setState({ user:{...user,[name]: value} });
+    const {patient}=this.state;
+    this.setState({ patient:{...patient,[name]: value} });
 }
 
 handleSubmit(e) {
     e.preventDefault();
 
+    const newPatient= {...this.state.patient};
+
     this.setState({ submitted: true });
-    const {user} = this.state;
-    if (user.username) {
-        this.login(user);
+    const {patient} = this.state;
+    if (patient.username) {
+        this.login(patient);
     }
+    axios.post('http://localhost:5000/Patient', newPatient)
+    .then(()=> this.setState({redirect:true}))
+    .then(res=> console.log('this is res.data: ',newPatient))
+    .catch(err=>{console.error(err)})
 }
   login(data){
             console.log(data) 
             this.setState ({
-                user: {                   
-                    username: ''          
-                },
+                patient: {...data},
                 submitted: false
             });     
         }
@@ -52,20 +59,25 @@ handleSubmit(e) {
 
 render() {
   
-    const {user, submitted} = this.state;
+    const {patient, submitted,redirect} = this.state;
+    if (redirect){
+   
+        return(<Redirect to={{pathname: "../pt_view/ptpage",state:patient}}/>
+        );
+        }
     return (
         <div id='box' className="col-md-6 col-md-offset-3">          
              <h2>Login Page</h2> 
             <form name="form" onSubmit={this.handleSubmit}>
-                <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
+                <div className={'form-group' + (submitted && !patient.username ? ' has-error' : '')}>
                     <label htmlFor="username">Username</label>
-                    <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
-                    {submitted && !user.username &&                      
+                    <input type="text" className="form-control" name="username" value={patient.username} onChange={this.handleChange} />
+                    {submitted && !patient.username &&                      
                         <div className='help-block'>Username isrequired</div>   
                     }
                 </div>               
                 <div className="form-group">
-                    <button className="btn btn-primary">Login</button>
+                <button type="submit">              Submit </button>
                      <button>
                      <Link to="./registerpage" className="btn btn-link">Register</Link>
                          </button>       
